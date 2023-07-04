@@ -1,16 +1,20 @@
 import React from "react";
-import { View,Text,StyleSheet } from "react-native";
+import { TouchableOpacity } from "react-native";
+import { KeyboardAvoidingView } from "react-native";
+import { View,TextInput,StyleSheet,Platform,Text,ImageBackground} from "react-native";
 
 
 export default function HomeScreen(){
     return(
-        <View style= {{flex:1}}>
-            <View style={styles.container}>
-        
+        <View style={styles.container}>
+            <View style = {styles.head}/>
+            <KeyboardAvoidingView behavior = {Platform.OS === 'ios' ? 'padding' : null}>
+            <View style = {styles.foot}>
+                <TextInput style = {styles.input1}
+                        placeholder="  Username"> 
+                </TextInput>
             </View>
-            <View style = {styles.fred}>
-
-            </View>
+            </KeyboardAvoidingView>
         </View>
         
     );
@@ -18,17 +22,27 @@ export default function HomeScreen(){
 
 const styles = StyleSheet.create({
     container: {
-      flex: 2,
-      borderTopLeftRadius: 10,
-      overflow: 'hidden',
-      backgroundColor: 'red',
-      position:'relative'
+      flex:1,
+      backgroundColor:'green'
     },
-    fred:{
-        flex: 1,
-        borderTopLeftRadius: 10,
-        overflow: 'hidden',
-        backgroundColor: 'white',
-        zIndex: 1
-    }
+    head:{
+       flex:1,
+       backgroundColor:'green'
+    },
+    foot:{
+        //height: "78%",
+        padding:140,
+        backgroundColor:'white',
+        borderTopLeftRadius: 180,
+        alignItems:"center"
+    },
+    input1:{
+        marginTop:20,
+        backgroundColor:'lightgray',
+        height:40,
+        width:"200%",
+        borderRadius:15,
+        fontWeight:"bold",
+        paddingHorizontal:20
+    },
   });

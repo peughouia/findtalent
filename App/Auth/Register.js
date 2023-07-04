@@ -1,7 +1,15 @@
-import React from "react";
-import { View,Text,ImageBackground,StyleSheet,TextInput,TouchableOpacity,ScrollView } from "react-native";
+import React, { useState } from "react";
+import { SelectList } from 'react-native-dropdown-select-list'
+import { View,Text,ImageBackground,StyleSheet,TextInput,TouchableOpacity,KeyboardAvoidingView } from "react-native";
 
 export default function Register({navigation}){
+
+    const [selected, setSelected] = React.useState("");
+  
+    const data = [
+        {key:'1', value:'Recruiter'},
+        {key:'2', value:'Candidate'},
+    ]
 
     return(
         <ImageBackground style={styles.contain}
@@ -10,28 +18,36 @@ export default function Register({navigation}){
             <View style={styles.login}>
                 <Text style={styles.textlogin}>Register</Text>
             </View>
-            
+            <KeyboardAvoidingView behavior = {Platform.OS === 'ios' ? 'padding' : null}>
             <View style={styles.cardContainer}>
+                
                 <View style = {styles.welcome}>
                     <Text style = {styles.textwelcome}>Welcome</Text>
                     <Text style = {styles.textaccount}>Create your new account</Text>
                 </View>
 
                 <View style = {styles.ginput}>
-                    <TextInput style = {styles.input1}
-                    placeholder="  Username"> 
+                <SelectList 
+                        setSelected={(val) => setSelected(val)} 
+                        data={data} 
+                        save="value"
+                        style = {styles.input1}
+                    />
+
+                    <TextInput style = {styles.input2}
+                    placeholder="Username"> 
                     </TextInput>
 
                     <TextInput style = {styles.input2}
-                    placeholder="  E-mail"> 
+                    placeholder="E-mail"> 
                     </TextInput>
                 
                     <TextInput style = {styles.input2}
-                    placeholder="  Password">
+                    placeholder="Password">
                     </TextInput>
 
                     <TextInput style = {styles.input2}
-                    placeholder="  Confirm Password">
+                    placeholder="Confirm Password">
                     </TextInput>
                 </View>
 
@@ -39,12 +55,13 @@ export default function Register({navigation}){
                     <Text style={styles.bouton}>Login</Text>
                 </TouchableOpacity>
                 
-                <View style = {styles.vregister}>
+                <View style = {styles.vconnexion}>
                     <Text>I Already have an account</Text>
                     <TouchableOpacity onPress={() => navigation.navigate('Connexion')}>
-                        <Text style = {styles.textreg2}> Connexion?</Text></TouchableOpacity>
+                        <Text style = {styles.textcon}> Connexion?</Text></TouchableOpacity>
                 </View>
             </View>
+            </KeyboardAvoidingView>
       </ImageBackground>
     );
 }
@@ -54,11 +71,12 @@ const styles = StyleSheet.create({
     //grand conteneur
     contain : {
         flex: 1,
-        justifyContent:'flex-end',
     },
     //card du centre
     cardContainer:{
-        height: "78%",
+        position:"relative",
+        top:55,
+        padding:125,
         backgroundColor: 'white',
         borderTopLeftRadius: 180,
         alignItems: 'center',
@@ -67,6 +85,7 @@ const styles = StyleSheet.create({
     //View et text du login
     login:{
         flex:1,
+        top:45,
         alignItems:"center",
         justifyContent:"center",
     },
@@ -79,7 +98,8 @@ const styles = StyleSheet.create({
     welcome:{
         alignItems:"center",
         position:"relative",
-        top: -25,
+        width:"280%",
+        bottom: 100,
     },
     textwelcome :{
             color: "#3589f2",
@@ -92,9 +112,9 @@ const styles = StyleSheet.create({
     },
     //View et text de TextInput
     ginput:{
-        width:"75%",
+        width:300,
         position:"relative",
-        top:-25
+        bottom:80,
     },
     input1:{
         marginTop:30,
@@ -102,31 +122,24 @@ const styles = StyleSheet.create({
         height:40,
         borderRadius:15,
         fontWeight:"bold",
+        paddingHorizontal:15
     },
     input2:{
         marginTop:20,
         backgroundColor:"lightgray", 
         height: 40,
         borderRadius:15,
-        fontWeight:"bold"
-    },
-    //view du texte forgot
-    forgot:{
-        position:"relative",
-        left: 80,
-        top:-15
-    },
-    textforgot:{
-        fontWeight:"bold"
+        fontWeight:"bold",
+        paddingHorizontal:15
     },
     //view et text du bouton
     vbouton:{
         backgroundColor:"#3589f2",
         borderRadius:13,
-        width:"75%",
+        width:300,
         height:33,
         position:"relative",
-        top:90
+        bottom:40
     },
     bouton:{
        color:"white",
@@ -135,13 +148,13 @@ const styles = StyleSheet.create({
        textAlign:"center"
     },
     //view et ttext de register
-    vregister:{
+    vconnexion:{
+        width:250,
         flexDirection:"row",
         position:"relative",
-        top:95,
-        //left:45
+        bottom:25,
     },
-    textreg2:{
+    textcon:{
         fontWeight:"bold"
     }
 

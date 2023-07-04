@@ -1,5 +1,4 @@
 import { NavigationContainer } from '@react-navigation/native';
-import { StatusBar } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import HomeScreen from './App/Candidate/Screen/Home';
 import Connexion from './App/Auth/Connexion';
@@ -10,7 +9,7 @@ const Stack = createNativeStackNavigator()
 export default function App() {
   return (
     <NavigationContainer>
-        <Stack.Navigator initialRouteName="Connexion">
+        <Stack.Navigator initialRouteName="Register">
           <Stack.Screen component={HomeScreen} name="Home" 
                   options={{ headerShown:false }}/>
 
